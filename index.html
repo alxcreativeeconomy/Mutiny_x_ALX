@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="mutiny.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -17,9 +17,10 @@
                     },
                     colors: {
                         brand: {
-                            purple: '#a855f7',
-                            pink: '#ec4899',
-                            dark: '#0f172a',
+                            pink: '#ff007f', /* Neon Pink from assets */
+                            cyan: '#00e5ff', /* Neon Cyan from assets */
+                            dark: '#050505', /* Pitch black for maximum contrast */
+                            surface: '#111111',
                         }
                     }
                 }
@@ -27,134 +28,172 @@
         }
     </script>
     <style>
-        .gradient-text {
-            background: linear-gradient(to right, #a855f7, #ec4899);
-            -webkit-background-clip: text;
+        body {
+            background-color: #050505;
+        }
+        
+        /* Typography Highlights */
+        .text-neon-pink {
+            color: #ff007f;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
+        }
+        .text-neon-cyan {
+            color: #00e5ff;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+        }
+        .gradient-text-cyber {
+            background: linear-gradient(90deg, #ff007f, #00e5ff);
             background-clip: text;
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Background Patterns & Textures */
+        .tech-grid {
+            background-image: 
+                linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
         .hero-bg {
-            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1598550476439-6847785fcea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-image: linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.95)), url('https://images.unsplash.com/photo-1598550476439-6847785fcea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
-        /* Disable fixed background on mobile for performance/support */
         @media (max-width: 768px) {
-            .hero-bg {
-                background-attachment: scroll;
-            }
+            .hero-bg { background-attachment: scroll; }
         }
+
+        /* Glassmorphism & Borders */
         .glass-card {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(17, 17, 17, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
-        /* Custom Animation for the Logo X */
-        @keyframes neon-pulse {
-            0%, 100% { 
-                text-shadow: 0 0 4px #a855f7, 0 0 10px #a855f7; 
-                opacity: 1; 
-            }
-            50% { 
-                text-shadow: 0 0 2px #a855f7, 0 0 5px #a855f7; 
-                opacity: 0.7; 
-            }
+        .border-neon-pink {
+            border-color: #ff007f;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.2), inset 0 0 10px rgba(255, 0, 127, 0.1);
         }
-        .animate-neon {
-            animation: neon-pulse 2s infinite ease-in-out;
+        .border-neon-cyan {
+            border-color: #00e5ff;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2), inset 0 0 10px rgba(0, 229, 255, 0.1);
         }
+
+        /* Animations */
+        @keyframes neon-pulse-purple {
+            0%, 100% { text-shadow: 0 0 5px #a855f7, 0 0 15px #a855f7; opacity: 1; }
+            50% { text-shadow: 0 0 2px #a855f7, 0 0 8px #a855f7; opacity: 0.8; }
+        }
+        .animate-neon-purple { animation: neon-pulse-purple 2s infinite ease-in-out; }
+
+        @keyframes neon-pulse-pink {
+            0%, 100% { text-shadow: 0 0 5px #ff007f, 0 0 15px #ff007f; opacity: 1; }
+            50% { text-shadow: 0 0 2px #ff007f, 0 0 8px #ff007f; opacity: 0.8; }
+        }
+        @keyframes glitch-anim {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+        .animate-neon-pink { animation: neon-pulse-pink 2s infinite ease-in-out; }
+        .hover-glitch:hover { animation: glitch-anim 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; }
     </style>
 </head>
-<body class="bg-slate-950 text-white antialiased selection:bg-purple-500 selection:text-white">
+<body class="text-white antialiased selection:bg-brand-pink selection:text-white relative">
+
+    <!-- Global Cyber Background overlay -->
+    <div class="fixed inset-0 tech-grid pointer-events-none z-[-1]"></div>
 
     <!-- NAVIGATION -->
-    <nav class="fixed w-full z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800 transition-all duration-300">
+    <nav class="fixed w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <div class="flex items-center group cursor-pointer">
-                    <!-- BLENDED LOGO SVG -->
-                    <svg class="h-10 w-auto" viewBox="0 0 230 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mutiny x ALX Logo">
-                        <!-- Mutiny Text -->
-                        <text x="0" y="28" font-family="sans-serif" font-weight="900" font-size="24" fill="white" letter-spacing="0.5">MUTINY</text>
-
-                        <!-- Separator with Glow Animation -->
-                        <text x="125" y="28" class="animate-neon" font-family="sans-serif" font-weight="900" font-style="italic" font-size="24" fill="#a855f7" text-anchor="middle">x</text>
-                        
-                        <!-- ALX Logo Part -->
-                        <text x="150" y="28" font-family="sans-serif" font-weight="900" font-size="24" letter-spacing="-1" fill="white">ALX</text>
-                    </svg>
-                </div>
+                <!-- HTML Logo for Pixel-Perfect Kerning -->
+                <a href="#" class="flex items-center cursor-pointer select-none no-underline group">
+                    <span class="font-sans font-black text-[26px] tracking-tight text-white group-hover:text-gray-200 transition">MUTINY</span>
+                    <span class="font-sans font-black text-[20px] text-brand-pink animate-neon-pink pt-1">x</span>
+                    <span class="font-sans font-black text-[26px] tracking-tight text-white pl-1.5 group-hover:text-gray-200 transition">ALX</span>
+                </a>
+                
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#about" class="hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Who We Are</a>
-                        <a href="#artists" class="hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition duration-300">The Artists</a>
-                        <a href="#roles" class="hover:text-purple-400 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Open Roles</a>
-                        <a href="#apply" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-6 py-2.5 rounded-full font-bold transition transform hover:scale-105 shadow-lg shadow-purple-900/50">Apply Now</a>
+                        <a href="#about" class="hover:text-brand-cyan px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider transition duration-300">Who We Are</a>
+                        <a href="#artists" class="hover:text-brand-cyan px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider transition duration-300">The Artists</a>
+                        <a href="#roles" class="hover:text-brand-cyan px-3 py-2 rounded-md text-sm font-bold uppercase tracking-wider transition duration-300">Roles</a>
+                        <a href="#apply" class="border-2 border-brand-pink text-brand-pink hover:bg-brand-pink hover:text-white px-6 py-2 rounded-none font-black uppercase tracking-widest transition-all duration-300 shadow-[0_0_10px_rgba(255,0,127,0.3)]">Apply Now</a>
                     </div>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
+                    <button id="mobile-menu-btn" class="text-white hover:text-brand-cyan focus:outline-none p-2">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 absolute w-full left-0 top-20 shadow-2xl">
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-surface border-b border-white/10 absolute w-full left-0 top-20 shadow-2xl">
             <div class="px-4 py-4 space-y-2">
-                <a href="#about" class="block px-3 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">Who We Are</a>
-                <a href="#artists" class="block px-3 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">The Artists</a>
-                <a href="#roles" class="block px-3 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">Open Roles</a>
-                <a href="#apply" class="block px-3 py-3 rounded-lg text-base font-bold text-white bg-purple-600 hover:bg-purple-700 text-center mt-4">Apply Now</a>
+                <a href="#about" class="block px-3 py-3 text-base font-bold uppercase text-slate-300 hover:text-brand-cyan transition">Who We Are</a>
+                <a href="#artists" class="block px-3 py-3 text-base font-bold uppercase text-slate-300 hover:text-brand-cyan transition">The Artists</a>
+                <a href="#roles" class="block px-3 py-3 text-base font-bold uppercase text-slate-300 hover:text-brand-cyan transition">Roles</a>
+                <a href="#apply" class="block px-3 py-3 mt-4 text-center border-2 border-brand-pink text-brand-pink font-black uppercase hover:bg-brand-pink hover:text-white transition">Apply Now</a>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
     <header class="hero-bg min-h-screen flex items-center justify-center text-center px-4 pt-20 relative overflow-hidden">
-        <!-- Floating Elements -->
-        <div class="absolute top-1/4 left-10 w-24 h-24 bg-purple-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-        <div class="absolute bottom-1/4 right-10 w-32 h-32 bg-pink-600 rounded-full blur-3xl opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
+        
+        <!-- Geometric Accents (Matching Asset 3) -->
+        <div class="absolute top-1/4 right-10 md:right-20 text-brand-pink opacity-40"><i class="fas fa-times text-5xl"></i></div>
+        <div class="absolute bottom-1/4 left-10 md:left-20 text-brand-cyan opacity-40"><i class="far fa-circle text-5xl"></i></div>
+        <div class="absolute top-1/3 left-10 text-brand-pink opacity-20 transform -rotate-12"><i class="fas fa-play text-4xl"></i></div>
+
+        <!-- Glow Orbs -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-pink rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-cyan rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
 
         <div class="max-w-5xl mx-auto relative z-10">
-            <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-purple-900/30 border border-purple-500/50 text-purple-300 text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
-                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                10-15 SPOTS AVAILABLE | PILOT PROGRAM
+            <div class="inline-flex items-center gap-2 py-1 px-4 border border-brand-cyan bg-brand-cyan/10 text-brand-cyan text-sm font-black uppercase tracking-widest mb-8">
+                <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                Ages 16-24 | Digital Natives
             </div>
             
-            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight tracking-tight">
-                Work With <br class="hidden md:block" />
-                <span class="gradient-text">Real Artists.</span>
+            <h1 class="text-5xl sm:text-6xl md:text-8xl font-black mb-6 leading-none tracking-tight uppercase hover-glitch">
+                Build The <span class="text-neon-cyan">Future</span> <br class="hidden md:block" />
+                Of <span class="text-neon-pink">African Culture</span>
             </h1>
             
-            <p class="text-lg sm:text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl mx-auto font-light leading-relaxed px-2">
-                This isn't an internship. You won't be making coffee. <br class="hidden md:block">You'll be building campaigns for African artists that <span class="text-white font-semibold">millions of people will see.</span>
+            <p class="text-lg sm:text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto font-medium leading-relaxed px-2">
+                This isn't an internship. You won't be making coffee. <br class="hidden md:block">You'll be building campaigns for real artists that <span class="text-white font-bold underline decoration-brand-pink decoration-4 underline-offset-4">millions of people</span> will see.
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center px-4">
-                <a href="#apply" class="w-full sm:w-auto bg-white text-slate-900 px-8 py-4 rounded-full font-black text-lg hover:bg-slate-200 transition transform hover:-translate-y-1 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                    Apply for the Program
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center px-4">
+                <a href="#apply" class="w-full sm:w-auto bg-brand-pink text-white px-10 py-4 font-black text-xl tracking-widest uppercase hover:bg-white hover:text-brand-pink transition-colors duration-300 shadow-[0_0_20px_rgba(255,0,127,0.5)]">
+                    Apply Now
                 </a>
-                <a href="#how-it-works" class="w-full sm:w-auto border border-slate-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-800 hover:border-slate-500 transition">
-                    How It Works
+                <a href="#how-it-works" class="w-full sm:w-auto border-2 border-brand-cyan text-brand-cyan px-10 py-4 font-black text-xl tracking-widest uppercase hover:bg-brand-cyan hover:text-brand-dark transition-colors duration-300 shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+                    The Details
                 </a>
             </div>
 
-            <!-- Social Proof / Ticker -->
-            <div class="mt-16 pt-8 border-t border-slate-800/50 flex flex-wrap justify-center gap-8 md:gap-16 text-slate-500 grayscale opacity-70">
-                <div class="flex flex-col items-center min-w-[80px]">
-                    <i class="fas fa-users text-2xl mb-2"></i>
-                    <span class="text-xs font-bold tracking-widest uppercase">Gen Z Team</span>
+            <!-- Stats Ticker -->
+            <div class="mt-20 pt-8 border-t border-white/10 flex flex-wrap justify-center gap-8 md:gap-16 text-slate-400">
+                <div class="flex flex-col items-center">
+                    <span class="text-2xl font-black text-brand-cyan mb-1">10-15</span>
+                    <span class="text-xs font-bold tracking-widest uppercase">Available Spots</span>
                 </div>
-                <div class="flex flex-col items-center min-w-[80px]">
-                    <i class="fas fa-globe-africa text-2xl mb-2"></i>
-                    <span class="text-xs font-bold tracking-widest uppercase">Pan-African</span>
+                <div class="flex flex-col items-center">
+                    <span class="text-2xl font-black text-brand-pink mb-1">60-90</span>
+                    <span class="text-xs font-bold tracking-widest uppercase">Days Duration</span>
                 </div>
-                <div class="flex flex-col items-center min-w-[80px]">
-                    <i class="fas fa-music text-2xl mb-2"></i>
+                <div class="flex flex-col items-center">
+                    <span class="text-2xl font-black text-brand-cyan mb-1">100%</span>
                     <span class="text-xs font-bold tracking-widest uppercase">Real Impact</span>
                 </div>
             </div>
@@ -162,47 +201,42 @@
     </header>
 
     <!-- WHO WE ARE -->
-    <section id="about" class="py-24 bg-slate-900 relative">
+    <section id="about" class="py-24 relative border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div>
-                    <h2 class="text-4xl md:text-5xl font-black mb-8 leading-tight">We Are <span class="text-purple-500">The Culture.</span></h2>
-                    <p class="text-lg text-slate-400 mb-6 leading-relaxed">
-                        Mutiny is a youth-led digital agency that builds movements for African artists and brands. Our entire team is <span class="text-white font-bold">Gen Z (16-24)</span>, We understand the culture because we <span class="text-white font-bold italic">are</span> the culture.
+                    <h2 class="text-4xl md:text-5xl font-black mb-8 leading-tight uppercase">We Are <span class="text-neon-cyan">The Culture.</span></h2>
+                    <p class="text-lg text-slate-300 mb-6 leading-relaxed">
+                        Mutiny is a youth-led digital agency that builds movements for African artists and brands. Our entire team is <span class="text-brand-pink font-bold">Gen Z (16-24)</span>. We understand the culture because we <span class="text-white font-bold italic">are</span> the culture.
                     </p>
-                    <p class="text-lg text-slate-400 mb-8 leading-relaxed">
-                        We act as a modern digital street team, creating content across fan pages and campaigns that move culture. Now, we are partnering with <span class="text-white font-bold">ALX</span> to give you a shot at the big leagues.
+                    <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+                        We act as a modern digital street team, creating content across fan pages and campaigns that move culture. Now, we are partnering with <span class="text-brand-cyan font-bold">ALX</span> to give you a shot at the big leagues.
                     </p>
                     
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-purple-500/20 flex items-center justify-center mt-1">
-                                <i class="fas fa-check text-xs text-purple-400"></i>
-                            </div>
-                            <p class="ml-4 text-slate-300">Part of ACA Studios / Exodus ecosystem</p>
+                    <div class="space-y-5">
+                        <div class="flex items-center">
+                            <i class="fas fa-bolt text-brand-pink text-xl w-8"></i>
+                            <p class="text-white font-medium tracking-wide">Part of ACA Studios / Exodus ecosystem</p>
                         </div>
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-purple-500/20 flex items-center justify-center mt-1">
-                                <i class="fas fa-check text-xs text-purple-400"></i>
-                            </div>
-                            <p class="ml-4 text-slate-300">Millions of followers across our network</p>
+                        <div class="flex items-center">
+                            <i class="fas fa-bolt text-brand-cyan text-xl w-8"></i>
+                            <p class="text-white font-medium tracking-wide">Millions of followers across our network</p>
                         </div>
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-purple-500/20 flex items-center justify-center mt-1">
-                                <i class="fas fa-check text-xs text-purple-400"></i>
-                            </div>
-                            <p class="ml-4 text-slate-300">Global industry networks</p>
+                        <div class="flex items-center">
+                            <i class="fas fa-bolt text-brand-pink text-xl w-8"></i>
+                            <p class="text-white font-medium tracking-wide">Global industry networks</p>
                         </div>
                     </div>
                 </div>
-                <div class="relative group mt-8 md:mt-0">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
-                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80" alt="Creative Studio Session" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                <div class="relative mt-8 md:mt-0">
+                    <!-- Tech border accent -->
+                    <div class="absolute -inset-2 border-2 border-brand-cyan opacity-50 z-0 transform translate-x-4 translate-y-4"></div>
+                    <div class="relative z-10 overflow-hidden border-2 border-brand-pink">
+                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80" alt="Creative Studio" class="w-full h-full object-cover transition duration-700 hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-90"></div>
                         <div class="absolute bottom-6 left-6">
-                            <p class="text-sm font-bold text-purple-400 uppercase tracking-wider mb-1">Location</p>
-                            <p class="text-2xl font-bold text-white">Johannesburg / Remote</p>
+                            <p class="text-sm font-black text-brand-cyan uppercase tracking-widest mb-1">HQ / Base</p>
+                            <p class="text-2xl font-black text-white uppercase">ALX JHB Hub</p>
                         </div>
                     </div>
                 </div>
@@ -211,88 +245,79 @@
     </section>
 
     <!-- THE ARTISTS -->
-    <section id="artists" class="py-24 bg-slate-950 border-y border-slate-800/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="artists" class="py-24 border-y border-white/10 relative overflow-hidden">
+        <!-- Background accent -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-pink/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-20">
-                <span class="text-purple-500 font-bold tracking-wider text-sm uppercase">The Talent</span>
-                <h2 class="text-4xl md:text-5xl font-black mt-2 mb-4 text-white">Meet The Artists</h2>
-                <p class="text-xl text-slate-400">Real artists. Real audiences. Real campaigns.</p>
+                <span class="text-brand-pink font-black tracking-widest text-sm uppercase block mb-2">// THE TALENT</span>
+                <h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">Meet <span class="text-neon-cyan">The Artists</span></h2>
+                <p class="text-xl text-slate-400 mt-4">Real artists. Real audiences. Real campaigns.</p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Artist 1: Xowie -->
-                <div class="glass-card rounded-2xl overflow-hidden hover:border-pink-500/50 transition duration-300 group relative">
-                    <div class="h-64 bg-slate-900 relative overflow-hidden">
-                        <img src="Xowie.jpg" alt="Xowié" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <span class="text-8xl font-black text-pink-500/20 absolute -top-10 -right-4 select-none">X</span>
-                        </div>
+                <div class="glass-card border-none ring-1 ring-white/10 hover:ring-brand-pink transition-all duration-300 group relative flex flex-col">
+                    <div class="h-72 bg-brand-surface relative overflow-hidden">
+                        <img src="Xowie.jpg" alt="Xowié" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-surface/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-brand-pink text-white text-xs font-black px-3 py-1 uppercase tracking-wider">Target</div>
                     </div>
-                    <div class="p-8 pt-2 relative">
-                        <h3 class="text-3xl font-black mb-2 text-white">XOWIÉ</h3>
-                        <div class="inline-block px-3 py-1 rounded-full bg-pink-500/10 text-pink-400 text-xs font-bold tracking-wide mb-4 border border-pink-500/20">
+                    <div class="p-8 pt-4 relative flex-grow flex flex-col">
+                        <h3 class="text-3xl font-black mb-2 text-white uppercase tracking-wider">XOWIÉ</h3>
+                        <div class="inline-block px-2 py-1 bg-brand-pink/10 text-brand-pink text-xs font-bold tracking-widest mb-4 border border-brand-pink/30 uppercase w-max">
                             AFROBEAT / AMAPIANO
                         </div>
-                        <p class="text-slate-400 leading-relaxed">Rising Afrobeat artist with a growing fanbase across South Africa and beyond.</p>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Rising Afrobeat artist with a growing fanbase across South Africa and beyond.</p>
                         
-                        <!-- Instagram Link -->
-                        <div class="pt-4 border-t border-slate-800/50 mt-4">
-                            <a href="https://www.instagram.com/xowie_music/" target="_blank" class="inline-flex items-center text-slate-400 hover:text-blue-500 transition-colors duration-300">
-                                <i class="fab fa-instagram text-xl mr-2"></i>
-                                <span class="font-bold text-sm tracking-wide">@xowie</span>
+                        <div class="pt-4 border-t border-white/10">
+                            <a href="https://www.instagram.com/xowie_music/" target="_blank" class="inline-flex items-center text-white hover:text-brand-pink transition-colors duration-300 font-bold text-sm tracking-wide">
+                                <i class="fab fa-instagram text-brand-pink text-xl mr-2"></i> @xowie_music
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Artist 2: Yonda -->
-                <div class="glass-card rounded-2xl overflow-hidden hover:border-blue-500/50 transition duration-300 group relative">
-                    <div class="h-64 bg-slate-900 relative overflow-hidden">
-                        <img src="Yonda.jpg" alt="Yonda" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition duration-500 grayscale group-hover:grayscale-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <span class="text-8xl font-black text-blue-500/20 absolute -top-10 -right-4 select-none">Y</span>
-                        </div>
+                <div class="glass-card border-none ring-1 ring-white/10 hover:ring-brand-cyan transition-all duration-300 group relative flex flex-col">
+                    <div class="h-72 bg-brand-surface relative overflow-hidden">
+                        <img src="Yonda.jpg" alt="Yonda" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-surface/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-brand-cyan text-brand-dark text-xs font-black px-3 py-1 uppercase tracking-wider">Target</div>
                     </div>
-                    <div class="p-8 pt-2 relative">
-                        <h3 class="text-3xl font-black mb-2 text-white">YONDA</h3>
-                        <div class="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold tracking-wide mb-4 border border-blue-500/20">
+                    <div class="p-8 pt-4 relative flex-grow flex flex-col">
+                        <h3 class="text-3xl font-black mb-2 text-white uppercase tracking-wider">YONDA</h3>
+                        <div class="inline-block px-2 py-1 bg-brand-cyan/10 text-brand-cyan text-xs font-bold tracking-widest mb-4 border border-brand-cyan/30 uppercase w-max">
                             HIP-HOP / AFRO-FUSION
                         </div>
-                        <p class="text-slate-400 leading-relaxed">Dynamic performer known for high-energy shows and authentic African sound.</p>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Dynamic performer known for high-energy shows and authentic African sound.</p>
                         
-                        <!-- Instagram Link -->
-                        <div class="pt-4 border-t border-slate-800/50 mt-4">
-                            <a href="https://www.instagram.com/yonda._music/" target="_blank" class="inline-flex items-center text-slate-400 hover:text-blue-500 transition-colors duration-300">
-                                <i class="fab fa-instagram text-xl mr-2"></i>
-                                <span class="font-bold text-sm tracking-wide">@yonda</span>
+                        <div class="pt-4 border-t border-white/10">
+                            <a href="https://www.instagram.com/yonda._music/" target="_blank" class="inline-flex items-center text-white hover:text-brand-cyan transition-colors duration-300 font-bold text-sm tracking-wide">
+                                <i class="fab fa-instagram text-brand-cyan text-xl mr-2"></i> @yonda._music
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Artist 3: Stacy -->
-                 <div class="glass-card rounded-2xl overflow-hidden hover:border-orange-500/50 transition duration-300 group relative">
-                    <div class="h-64 bg-slate-900 relative overflow-hidden">
-                        <img src="Stacy1.png" alt="Stacy" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition duration-500 grayscale group-hover:grayscale-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <span class="text-8xl font-black text-orange-500/20 absolute -top-10 -right-4 select-none">S</span>
-                        </div>
+                 <div class="glass-card border-none ring-1 ring-white/10 hover:ring-white transition-all duration-300 group relative flex flex-col">
+                    <div class="h-72 bg-brand-surface relative overflow-hidden">
+                        <img src="Stacy1.png" alt="Stacy" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-surface/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-white text-brand-dark text-xs font-black px-3 py-1 uppercase tracking-wider">Target</div>
                     </div>
-                    <div class="p-8 pt-2 relative">
-                        <h3 class="text-3xl font-black mb-2 text-white">STACY</h3>
-                        <div class="inline-block px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-bold tracking-wide mb-4 border border-orange-500/20">
+                    <div class="p-8 pt-4 relative flex-grow flex flex-col">
+                        <h3 class="text-3xl font-black mb-2 text-white uppercase tracking-wider">STACY</h3>
+                        <div class="inline-block px-2 py-1 bg-white/10 text-white text-xs font-bold tracking-widest mb-4 border border-white/30 uppercase w-max">
                             R&B / AFRO-SOUL
                         </div>
-                        <p class="text-slate-400 leading-relaxed">Emerging voice in African music with a unique style and dedicated following.</p>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Emerging voice in African music with a unique style and dedicated following.</p>
                         
-                        <!-- Instagram Link -->
-                        <div class="pt-4 border-t border-slate-800/50 mt-4">
-                            <a href="https://www.instagram.com/luvvvstacy?igsh=d2c4cnhvZjdvdW5o" target="_blank" class="inline-flex items-center text-slate-400 hover:text-blue-500 transition-colors duration-300">
-                                <i class="fab fa-instagram text-xl mr-2"></i>
-                                <span class="font-bold text-sm tracking-wide">@stacy</span>
+                        <div class="pt-4 border-t border-white/10">
+                            <a href="https://www.instagram.com/luvvvstacy?igsh=d2c4cnhvZjdvdW5o" target="_blank" class="inline-flex items-center text-white hover:text-brand-pink transition-colors duration-300 font-bold text-sm tracking-wide">
+                                <i class="fab fa-instagram text-white text-xl mr-2 group-hover:text-brand-pink transition-colors"></i> @luvvvstacy
                             </a>
                         </div>
                     </div>
@@ -302,202 +327,212 @@
     </section>
 
     <!-- ROLES & BENEFITS -->
-    <section id="roles" class="py-24 bg-slate-900">
+    <section id="roles" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-20">
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+                
                 <!-- Roles List -->
                 <div>
-                    <h2 class="text-3xl font-bold mb-8 text-white flex items-center">
-                        <span class="bg-purple-600 w-2 h-8 mr-4 rounded-full"></span>
-                        We're Hiring For These Roles
+                    <h2 class="text-3xl md:text-4xl font-black mb-8 text-white uppercase tracking-tight">
+                        <span class="text-brand-cyan">Who We</span> Want
                     </h2>
                     <div class="space-y-4">
-                        <div class="p-5 bg-slate-800/50 rounded-xl hover:bg-slate-800 transition border border-transparent hover:border-purple-500/30 cursor-default group">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="font-bold text-lg text-white group-hover:text-purple-400 transition">Social Media Creators</h4>
-                                <i class="fas fa-hashtag text-slate-600 group-hover:text-purple-500 transition"></i>
+                        <div class="p-5 border border-white/10 bg-brand-surface hover:border-brand-cyan transition cursor-default group flex items-center justify-between">
+                            <div>
+                                <h4 class="font-black text-lg text-white uppercase tracking-wide group-hover:text-brand-cyan transition">Social Media Creators</h4>
+                                <p class="text-sm text-slate-400 mt-1">Create engaging posts, reels, and stories.</p>
                             </div>
-                            <p class="text-sm text-slate-400">Create engaging posts, reels, and stories.</p>
+                            <i class="fas fa-hashtag text-brand-cyan/50 text-2xl group-hover:text-brand-cyan transition"></i>
                         </div>
                         
-                        <div class="p-5 bg-slate-800/50 rounded-xl hover:bg-slate-800 transition border border-transparent hover:border-purple-500/30 cursor-default group">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="font-bold text-lg text-white group-hover:text-purple-400 transition">Video Editors</h4>
-                                <i class="fas fa-video text-slate-600 group-hover:text-purple-500 transition"></i>
+                        <div class="p-5 border border-white/10 bg-brand-surface hover:border-brand-pink transition cursor-default group flex items-center justify-between">
+                            <div>
+                                <h4 class="font-black text-lg text-white uppercase tracking-wide group-hover:text-brand-pink transition">Video Editors</h4>
+                                <p class="text-sm text-slate-400 mt-1">Edit music videos and BTS content.</p>
                             </div>
-                            <p class="text-sm text-slate-400">Edit music videos and BTS content.</p>
+                            <i class="fas fa-video text-brand-pink/50 text-2xl group-hover:text-brand-pink transition"></i>
                         </div>
 
-                        <div class="p-5 bg-slate-800/50 rounded-xl hover:bg-slate-800 transition border border-transparent hover:border-purple-500/30 cursor-default group">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="font-bold text-lg text-white group-hover:text-purple-400 transition">Graphic Designers</h4>
-                                <i class="fas fa-pen-nib text-slate-600 group-hover:text-purple-500 transition"></i>
+                        <div class="p-5 border border-white/10 bg-brand-surface hover:border-brand-cyan transition cursor-default group flex items-center justify-between">
+                            <div>
+                                <h4 class="font-black text-lg text-white uppercase tracking-wide group-hover:text-brand-cyan transition">Graphic Designers</h4>
+                                <p class="text-sm text-slate-400 mt-1">Design album art and social graphics.</p>
                             </div>
-                            <p class="text-sm text-slate-400">Design album art and social graphics.</p>
+                            <i class="fas fa-pen-nib text-brand-cyan/50 text-2xl group-hover:text-brand-cyan transition"></i>
                         </div>
 
-                        <div class="p-5 bg-slate-800/50 rounded-xl hover:bg-slate-800 transition border border-transparent hover:border-purple-500/30 cursor-default group">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="font-bold text-lg text-white group-hover:text-purple-400 transition">Community Managers</h4>
-                                <i class="fas fa-comments text-slate-600 group-hover:text-purple-500 transition"></i>
+                        <div class="p-5 border border-white/10 bg-brand-surface hover:border-brand-pink transition cursor-default group flex items-center justify-between">
+                            <div>
+                                <h4 class="font-black text-lg text-white uppercase tracking-wide group-hover:text-brand-pink transition">Community Managers</h4>
+                                <p class="text-sm text-slate-400 mt-1">Engage with fans and build communities.</p>
                             </div>
-                            <p class="text-sm text-slate-400">Engage with fans and build communities.</p>
+                            <i class="fas fa-comments text-brand-pink/50 text-2xl group-hover:text-brand-pink transition"></i>
                         </div>
                         
-                        <div class="p-5 bg-slate-800/50 rounded-xl hover:bg-slate-800 transition border border-transparent hover:border-purple-500/30 cursor-default group">
-                            <div class="flex justify-between items-center mb-1">
-                                <h4 class="font-bold text-lg text-white group-hover:text-purple-400 transition">Copywriters & Data Analysts</h4>
-                                <i class="fas fa-chart-line text-slate-600 group-hover:text-purple-500 transition"></i>
+                        <div class="p-5 border border-white/10 bg-brand-surface hover:border-brand-cyan transition cursor-default group flex items-center justify-between">
+                            <div>
+                                <h4 class="font-black text-lg text-white uppercase tracking-wide group-hover:text-brand-cyan transition">Copywriters & Analysts</h4>
+                                <p class="text-sm text-slate-400 mt-1">Write campaigns or track engagement trends.</p>
                             </div>
-                            <p class="text-sm text-slate-400">Write campaigns or track engagement trends.</p>
+                            <i class="fas fa-chart-line text-brand-cyan/50 text-2xl group-hover:text-brand-cyan transition"></i>
                         </div>
-                    </div>
-                    <div class="mt-8 flex items-center p-4 bg-purple-900/10 border border-purple-500/20 rounded-lg">
-                        <i class="fas fa-info-circle text-purple-400 mr-3 text-xl"></i>
-                        <p class="text-purple-200 font-medium italic text-sm">We're looking for potential, not perfection. If you're hungry, apply.</p>
                     </div>
                 </div>
 
                 <!-- Benefits -->
-                <div class="relative mt-12 lg:mt-0">
-                    <h2 class="text-3xl font-bold mb-8 text-white flex items-center">
-                         <span class="bg-pink-600 w-2 h-8 mr-4 rounded-full"></span>
-                         What You Get
+                <div class="relative">
+                    <h2 class="text-3xl md:text-4xl font-black mb-8 text-white uppercase tracking-tight">
+                        <span class="text-brand-pink">What You</span> Get
                     </h2>
                     
-                    <div class="relative pl-10 border-l-2 border-slate-700 space-y-12">
+                    <div class="space-y-6">
                         <!-- Benefit 1 -->
-                        <div class="relative">
-                            <span class="absolute -left-[51px] top-0 h-4 w-4 rounded-full bg-slate-900 border-4 border-green-500 box-content"></span>
-                            <h4 class="text-xl font-bold text-white mb-2">Get Paid</h4>
-                            <p class="text-slate-400">Stipend/compensation for your work during the pilot. We value your time and effort.</p>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-square text-brand-pink text-sm"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-black text-white uppercase tracking-wide mb-1">Real Pay</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">Stipend/compensation for your work during the pilot. We value your time and effort.</p>
+                            </div>
                         </div>
 
                         <!-- Benefit 2 -->
-                        <div class="relative">
-                            <span class="absolute -left-[51px] top-0 h-4 w-4 rounded-full bg-slate-900 border-4 border-purple-500 box-content"></span>
-                            <h4 class="text-xl font-bold text-white mb-2">Real Portfolio</h4>
-                            <p class="text-slate-400">Actual artist credits to showcase. Don't say "I learned it," say "I did it for Yonda."</p>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-square text-brand-cyan text-sm"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-black text-white uppercase tracking-wide mb-1">Real Experience</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">Actual artist credits to showcase. Don't say "I learned it," say "I did it for Yonda."</p>
+                            </div>
                         </div>
 
                         <!-- Benefit 3 -->
-                        <div class="relative">
-                            <span class="absolute -left-[51px] top-0 h-4 w-4 rounded-full bg-slate-900 border-4 border-pink-500 box-content"></span>
-                            <h4 class="text-xl font-bold text-white mb-2">Gen Z Mentorship</h4>
-                            <p class="text-slate-400">Learn from 16-24 year olds who have already cracked the code in the industry.</p>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-square text-brand-pink text-sm"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-black text-white uppercase tracking-wide mb-1">Gen Z Mentorship</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">Learn from 16-24 year olds who have already cracked the code in the industry.</p>
+                            </div>
                         </div>
 
                         <!-- Benefit 4 -->
-                        <div class="relative">
-                            <span class="absolute -left-[51px] top-0 h-4 w-4 rounded-full bg-slate-900 border-4 border-blue-500 box-content"></span>
-                            <h4 class="text-xl font-bold text-white mb-2">Career Launch</h4>
-                            <p class="text-slate-400">Top performers get full-time Mutiny roles after the pilot. This is an audition.</p>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-square text-brand-cyan text-sm"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-black text-white uppercase tracking-wide mb-1">Real Ownership</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">Top performers get full-time Mutiny roles after the pilot. This is an audition.</p>
+                            </div>
                         </div>
                     </div>
                     
                     <!-- Decor Image -->
-                    <div class="mt-12 rounded-xl overflow-hidden border border-slate-700 opacity-60 hover:opacity-100 transition duration-500">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Team working together" class="w-full object-cover h-48">
+                    <div class="mt-12 border-2 border-white/20 p-2 relative">
+                        <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-brand-cyan -mt-1 -mr-1"></div>
+                        <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-brand-pink -mb-1 -ml-1"></div>
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Team working together" class="w-full object-cover h-48 transition duration-500 hover:scale-105">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- REQUIREMENTS SECTION (Added) -->
-    <section id="requirements" class="py-24 bg-slate-950 border-t border-slate-800/50">
+    <!-- REQUIREMENTS SECTION -->
+    <section id="requirements" class="py-24 border-t border-white/10 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-black text-white mb-4">What We're <span class="text-orange-500">Looking For</span></h2>
-                <p class="text-slate-400 text-lg">Do you have what it takes to join the Mutiny Program?</p>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">What We're <span class="gradient-text-cyber">Looking For</span></h2>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-                <!-- Must Haves -->
-                <div class="bg-gradient-to-b from-slate-900 to-slate-900/50 p-8 rounded-3xl border border-orange-500/20 shadow-[0_0_30px_rgba(249,115,22,0.1)] relative overflow-hidden group hover:border-orange-500/40 transition duration-300">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-red-500"></div>
-                    <h3 class="text-2xl font-bold mb-8 text-orange-500 flex items-center">
-                        <i class="fas fa-fire mr-3"></i> Must-Haves
+            <div class="grid md:grid-cols-2 gap-0 md:gap-8">
+                <!-- Must Haves (Pink Theme) -->
+                <div class="bg-[#2a081a] p-8 md:p-12 border-l-4 border-brand-pink relative overflow-hidden mb-8 md:mb-0 shadow-[0_0_30px_rgba(255,0,127,0.1)]">
+                    <h3 class="text-3xl font-black mb-8 text-brand-pink uppercase tracking-widest text-center">
+                        Must-Haves
                     </h3>
                     <ul class="space-y-6">
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-orange-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-check-circle text-brand-pink mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Passion for African music & culture</strong>
-                                <span class="text-slate-400 text-sm">You genuinely care about this.</span>
+                                <strong class="block text-white text-lg font-bold">Passion for African music & culture</strong>
+                                <span class="text-slate-300 text-sm">You genuinely care about this.</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-orange-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-check-circle text-brand-pink mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Basic skills in your chosen role</strong>
-                                <span class="text-slate-400 text-sm">Doesn't need to be perfect.</span>
+                                <strong class="block text-white text-lg font-bold">Basic skills in your chosen role</strong>
+                                <span class="text-slate-300 text-sm">Doesn't need to be perfect.</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-orange-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-check-circle text-brand-pink mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Willingness to learn & take feedback</strong>
-                                <span class="text-slate-400 text-sm">Coachability matters.</span>
+                                <strong class="block text-white text-lg font-bold">Willingness to learn & take feedback</strong>
+                                <span class="text-slate-300 text-sm">Coachability matters.</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-orange-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-check-circle text-brand-pink mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Ability to meet deadlines</strong>
-                                <span class="text-slate-400 text-sm">Campaigns move fast.</span>
+                                <strong class="block text-white text-lg font-bold">Ability to meet deadlines</strong>
+                                <span class="text-slate-300 text-sm">Campaigns move fast.</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-orange-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-check-circle text-brand-pink mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Cultural fluency</strong>
-                                <span class="text-slate-400 text-sm">You understand the internet and Gen Z culture.</span>
+                                <strong class="block text-white text-lg font-bold">Cultural fluency</strong>
+                                <span class="text-slate-300 text-sm">You understand the internet and Gen Z culture.</span>
                             </div>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Nice to Haves -->
-                <div class="bg-gradient-to-b from-slate-900 to-slate-900/50 p-8 rounded-3xl border border-blue-500/20 shadow-[0_0_30px_rgba(59,130,246,0.1)] relative overflow-hidden group hover:border-blue-500/40 transition duration-300">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
-                    <h3 class="text-2xl font-bold mb-8 text-blue-500 flex items-center">
-                        <i class="fas fa-star mr-3"></i> Nice-to-Have
+                <!-- Nice to Haves (Cyan Theme) -->
+                <div class="bg-[#041d26] p-8 md:p-12 border-l-4 border-brand-cyan relative overflow-hidden shadow-[0_0_30px_rgba(0,229,255,0.1)]">
+                    <h3 class="text-3xl font-black mb-8 text-brand-cyan uppercase tracking-widest text-center">
+                        Nice-to-Haves
                     </h3>
                     <ul class="space-y-6">
                         <li class="flex items-start">
-                            <i class="fas fa-star text-blue-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-star text-brand-cyan mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Existing portfolio</strong>
-                                <span class="text-slate-400 text-sm">But we'll help you build one if you don't.</span>
+                                <strong class="block text-white text-lg font-bold">Existing portfolio</strong>
+                                <span class="text-slate-300 text-sm">But we'll help you build one if you don't.</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-star text-blue-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-star text-brand-cyan mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Active social media presence</strong>
-                                <span class="text-slate-400 text-sm">Shows you understand platforms.</span>
+                                <strong class="block text-white text-lg font-bold">Active social media presence</strong>
+                                <span class="text-slate-300 text-sm">Shows you understand platforms.</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-star text-blue-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-star text-brand-cyan mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Lives in Johannesburg</strong>
-                                <span class="text-slate-400 text-sm">Easier for in-person collaboration.</span>
+                                <strong class="block text-white text-lg font-bold">Lives in Johannesburg</strong>
+                                <span class="text-slate-300 text-sm">Easier for in-person collaboration.</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-star text-blue-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-star text-brand-cyan mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Available for in-person sessions</strong>
-                                <span class="text-slate-400 text-sm">Some work is better face-to-face.</span>
+                                <strong class="block text-white text-lg font-bold">Available for in-person sessions</strong>
+                                <span class="text-slate-300 text-sm">Some work is better face-to-face.</span>
                             </div>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-star text-blue-500 mt-1 mr-4 text-xl"></i>
+                            <i class="fas fa-star text-brand-cyan mt-1 mr-4 text-xl"></i>
                             <div>
-                                <strong class="block text-white text-lg">Experience with creative tools</strong>
-                                <span class="text-slate-400 text-sm">Adobe, Canva, CapCut, etc.</span>
+                                <strong class="block text-white text-lg font-bold">Experience with creative tools</strong>
+                                <span class="text-slate-300 text-sm">Adobe, Canva, CapCut, etc.</span>
                             </div>
                         </li>
                     </ul>
@@ -505,46 +540,44 @@
             </div>
 
             <!-- Bottom Banner -->
-            <div class="mt-12 p-8 rounded-2xl bg-gradient-to-r from-purple-900/50 to-pink-900/50 border border-purple-500/30 text-center">
-                <p class="text-xl md:text-2xl text-white font-medium">
-                    We're looking for <span class="text-orange-400 font-bold">potential, not perfection</span>. <br class="hidden md:block">
-                    If you're hungry, coachable, and care about African music, <a href="#apply" class="text-white underline decoration-purple-500 decoration-2 underline-offset-4 hover:text-purple-300">apply</a>.
+            <div class="mt-12 p-8 border border-white/20 bg-brand-surface text-center">
+                <p class="text-xl md:text-2xl text-white font-medium uppercase tracking-wide">
+                    We're looking for <span class="text-brand-pink font-black">potential, not perfection</span>. <br class="hidden md:block">
+                    If you're hungry, coachable, and care about African music, <a href="#apply" class="text-brand-cyan hover:text-white underline decoration-brand-cyan decoration-2 underline-offset-4 transition">apply</a>.
                 </p>
             </div>
         </div>
     </section>
 
     <!-- LOGISTICS -->
-    <section id="how-it-works" class="py-16 bg-gradient-to-r from-slate-900 to-slate-800 border-t border-slate-700">
+    <section id="how-it-works" class="py-16 border-y border-white/10 bg-brand-surface">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-12">The Logistics</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-                <div class="p-6 bg-slate-900/50 rounded-xl border border-slate-700">
-                    <p class="text-slate-400 text-xs uppercase tracking-wider mb-2 font-bold">Duration</p>
-                    <p class="text-2xl font-black text-white">60-90 Days</p>
+                <div class="p-6 border border-white/5 bg-brand-dark">
+                    <p class="text-brand-pink text-xs uppercase tracking-widest mb-2 font-bold">Duration</p>
+                    <p class="text-2xl font-black text-white uppercase">60-90 Days</p>
                 </div>
-                <div class="p-6 bg-slate-900/50 rounded-xl border border-slate-700">
-                    <p class="text-slate-400 text-xs uppercase tracking-wider mb-2 font-bold">Location</p>
-                    <p class="text-xl md:text-2xl font-black text-white">ALX JHB Hub</p>
+                <div class="p-6 border border-white/5 bg-brand-dark">
+                    <p class="text-brand-cyan text-xs uppercase tracking-widest mb-2 font-bold">Location</p>
+                    <p class="text-xl md:text-2xl font-black text-white uppercase">ALX JHB Hub</p>
                 </div>
-                <div class="p-6 bg-slate-900/50 rounded-xl border border-slate-700">
-                    <p class="text-slate-400 text-xs uppercase tracking-wider mb-2 font-bold">Start Date</p>
-                    <p class="text-2xl font-black text-white">Within 2 Weeks</p>
+                <div class="p-6 border border-white/5 bg-brand-dark">
+                    <p class="text-brand-pink text-xs uppercase tracking-widest mb-2 font-bold">Start Date</p>
+                    <p class="text-2xl font-black text-white uppercase">Within 2 Weeks</p>
                 </div>
-                <div class="p-6 bg-slate-900/50 rounded-xl border border-slate-700">
-                    <p class="text-slate-400 text-xs uppercase tracking-wider mb-2 font-bold">Team Size</p>
-                    <p class="text-2xl font-black text-white text-purple-400">10-15 Students</p>
+                <div class="p-6 border border-white/5 bg-brand-dark">
+                    <p class="text-brand-cyan text-xs uppercase tracking-widest mb-2 font-bold">Team Size</p>
+                    <p class="text-2xl font-black text-white uppercase">10-15 Students</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ SECTION (Updated Layout) -->
-    <section id="faq" class="py-24 bg-slate-950 border-t border-slate-800/50">
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-black text-white mb-4">Frequently Asked <span class="text-purple-500">Questions</span></h2>
-                <p class="text-slate-400 text-lg">Everything you need to know about the pilot.</p>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Got <span class="text-brand-cyan">Questions?</span></h2>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6 items-start">
@@ -552,144 +585,127 @@
                 <!-- COLUMN 1: Program Details & Logistics -->
                 <div class="space-y-4">
                     <!-- Q: Real Job? -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             Is this a real job or just an internship?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             This is a real paid professional engagement, NOT an internship. You'll be creating content for real artists with real audiences. Your work will be seen by millions of people. You'll be compensated for your work, and top performers will be offered full-time positions with Mutiny.
                         </div>
                     </details>
 
                     <!-- Q: Duration -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             How long is it?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             60-90 days (2-3 months).
                         </div>
                     </details>
 
                     <!-- Q: Paid Work -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             Is it paid work?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             Yes, a stipend/compensation is included during the pilot.
                         </div>
                     </details>
 
                     <!-- Q: Salary Source -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             Who pays my salary ALX or ACA/Mutiny?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             Mutiny will handle all salary payments and employment terms.
                         </div>
                     </details>
 
                     <!-- Q: Location -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             Do I have to be based in Johannesburg?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             Yes, training will be conducted at the ALX JHB Hub.
                         </div>
                     </details>
 
                     <!-- Q: Selection -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             How competitive is the selection process?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             Very competitive. We're selecting 10-15 people from a large applicant pool. We're looking for a combination of basic skills, cultural fluency, coachability, and genuine passion for African music. Your portfolio matters, but so does your attitude and potential.
                         </div>
                     </details>
 
                     <!-- Q: Multiple Roles -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             Can I apply for multiple roles?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             Yes, but choose a primary role that best matches your strengths. If you have skills in multiple areas, mention it in your application. However, we'll place you in the role where you'll have the most impact.
                         </div>
                     </details>
 
                     <!-- Q: Equipment -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
-                            Do I need any specific equipment or software?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
+                            Do I need specific equipment or software?
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             You'll need a computer and stable internet connection. For specific roles, you may need access to design/editing software (Adobe Creative Suite, Canva, CapCut, etc.). If you're selected, we'll provide guidance on tools and resources.
                         </div>
                     </details>
 
-                    <!-- Q: Other Benefits -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
-                            Are there other benefits besides pay?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
-                            Yes! You'll gain access to ACA Studios' network and production facilities, mentorship from Mutiny's team, real artist credits for your portfolio, industry connections, and hands-on experience in Africa's music industry. This is about launching your career, not just earning a paycheck.
-                        </div>
-                    </details>
-
-                    <!-- Q: The Artists -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
-                            Who are Xowie, Yonda, and Stacy?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
-                            They're real African artists with real audiences. Xowie is a rising Afrobeat/Amapiano artist, Yonda is a dynamic Hip-Hop/Afro-Fusion performer, and Stacy is an emerging R&B/Afro-Soul voice. You'll be creating content for their actual fan bases; this isn't hypothetical.
-                        </div>
-                    </details>
-
                     <!-- Q: Cost -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             Is there any cost to participate?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             No. There is absolutely no cost to apply or participate. You will be PAID for your work. This is a professional engagement, not a course you pay for.
                         </div>
                     </details>
@@ -698,140 +714,136 @@
                 <!-- COLUMN 2: Application, Portfolio & Future -->
                 <div class="space-y-4">
                     <!-- Q: No Experience -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             What if I don't have experience?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             We are looking for potential, hunger and coachability over perfection.
                         </div>
                     </details>
 
                     <!-- Q: No Portfolio -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             What if I don't have a portfolio yet?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             That's okay! We're looking for potential, not perfection. If you don't have professional work, create sample projects for the artists (Xowie, Yonda, or Stacy). Make a mock social media post, write a sample bio, or design a concept album cover. Show us you have the hunger and creativity.
                         </div>
                     </details>
 
                     <!-- Q: What is a Portfolio -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             What is a Portfolio? (Tips inside)
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             <p class="mb-4">We aren't looking for perfection; we’re looking for potential, hunger, and cultural fluency. We want to see that you understand the "vibe" of African artists and can meet a deadline. Your 3–5 examples of work should prove you have the basic skills to start creating immediately.</p>
                             <p class="mb-2 font-bold text-white">If you've never done a portfolio, here are some tips:</p>
-                            <ul class="list-disc pl-5 space-y-2 text-sm text-slate-300">
-                                <li><strong>Social Media Creators:</strong> Submit links to high-performing Reels, TikToks, or a thread of 3-5 static posts that show you understand Gen Z trends.</li>
-                                <li><strong>Video Editors:</strong> Provide a link to a folder or YouTube/Vimeo/TikTok video you edited (Music videos or BTS preferred).</li>
-                                <li><strong>Graphic Designers:</strong> Upload a PDF or link to a folder containing album art, social media carousels, or promotional posters.</li>
-                                <li><strong>Copywriters:</strong> Submit a document with 3-5 examples of captions, bios, or a "mock" press release for an artist.</li>
-                                <li><strong>Data Analysts:</strong> Provide a screenshot or PDF of a basic report, spreadsheet, or trend analysis you've conducted.</li>
-                                <li><strong>Community Managers:</strong> Show us 3-5 screenshots of you engaging in a community (Discord, WhatsApp, or Social Comments) where you helped grow the vibe. Or your most engaged comments.</li>
+                            <ul class="list-disc pl-5 space-y-2 text-sm text-slate-400">
+                                <li><strong class="text-white">Social Media Creators:</strong> Submit links to high-performing Reels, TikToks, or a thread of 3-5 static posts that show you understand Gen Z trends.</li>
+                                <li><strong class="text-white">Video Editors:</strong> Provide a link to a folder or YouTube/Vimeo/TikTok video you edited (Music videos or BTS preferred).</li>
+                                <li><strong class="text-white">Graphic Designers:</strong> Upload a PDF or link to a folder containing album art, social media carousels, or promotional posters.</li>
+                                <li><strong class="text-white">Copywriters:</strong> Submit a document with 3-5 examples of captions, bios, or a "mock" press release for an artist.</li>
+                                <li><strong class="text-white">Data Analysts:</strong> Provide a screenshot or PDF of a basic report, spreadsheet, or trend analysis you've conducted.</li>
+                                <li><strong class="text-white">Community Managers:</strong> Show us 3-5 screenshots of you engaging in a community (Discord, WhatsApp, or Social Comments) where you helped grow the vibe. Or your most engaged comments.</li>
                             </ul>
                         </div>
                     </details>
 
                     <!-- Q: Stand Out -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             What's the best way to stand out?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             Be authentic. Show genuine passion for African music and culture. Submit a strong portfolio (or create sample work if you don't have one). Tell us specifically which artist you're excited to work with and WHY. We're looking for hunger, creativity, and coachability, not just technical skills.
                         </div>
                     </details>
 
                     <!-- Q: App Status -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
-                            Did my application actually go through?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
+                            Did my app actually go through?
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             If you saw the "We’ve received your submission..." screen after hitting submit, we’ve got you.
                         </div>
                     </details>
 
                     <!-- Q: Shortlist Timing -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             When will I know if I’m shortlisted?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             We move FAST. Our team will review all applications and reach out to the boldest candidates within one week of application to schedule assessments & interviews. If you haven't heard from us by then, it means we’ve moved forward with other candidates for this specific pilot.
                         </div>
                     </details>
 
                     <!-- Q: Interview Process -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             How does the interview work?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             If you're shortlisted, we’ll schedule your challenge assessment and telephonic call. We’ll talk about your passions, your chosen role, and how you handle feedback. We want to see if you’re ready to be part of the "modern digital street team". The agency will conduct final interviews.
                         </div>
                     </details>
 
                     <!-- Q: Future Career -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
-                            What career opportunities exist beyond Mutiny?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-pink transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
+                            What opportunities exist beyond this?
+                            <span class="text-brand-pink transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             The skills and experience you gain are transferable to any role in digital marketing, social media, content creation, community management, or the music industry. You'll also have access to ACA Studios' network, which includes artists, producers, labels, and brands across Africa.
                         </div>
                     </details>
 
-                    <!-- Q: Use in Portfolio -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
-                            Can I use the work in my portfolio?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
-                            </span>
-                        </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
-                            Yes! You'll be credited for your work and can showcase it in your portfolio. When applying for future jobs, you'll be able to say, "I created content for Xowie, Yonda, and Stacy that reached X million people." That's powerful proof of your abilities.
-                        </div>
-                    </details>
-
                     <!-- Q: After Pilot 2 -->
-                    <details class="group bg-slate-900 rounded-2xl border border-slate-800 open:border-purple-500/50 open:bg-slate-900/80 transition-all duration-300">
-                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none">
+                    <details class="group bg-brand-surface border border-white/10 open:border-brand-cyan transition-all duration-300">
+                        <summary class="flex justify-between items-center cursor-pointer p-5 font-bold text-base md:text-lg text-white select-none uppercase tracking-wide">
                             What happens after the pilot ends?
-                            <span class="text-purple-500 transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
-                                <i class="fas fa-chevron-down"></i>
+                            <span class="text-brand-cyan transition-transform duration-300 group-open:rotate-180 ml-4 flex-shrink-0">
+                                <i class="fas fa-plus group-open:hidden"></i>
+                                <i class="fas fa-minus hidden group-open:block"></i>
                             </span>
                         </summary>
-                        <div class="px-5 pb-5 text-slate-400 text-sm md:text-base leading-relaxed border-t border-slate-800/50 pt-4 mt-2">
+                        <div class="px-5 pb-5 text-slate-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 mt-2">
                             Top performers will be offered full-time positions with Mutiny. Performance is evaluated based on content quality, engagement metrics, work ethic, and cultural fit. Even if you're not offered a full-time role, you'll have real portfolio work and industry connections that will help your career.
                         </div>
                     </details>
@@ -842,59 +854,69 @@
     </section>
 
     <!-- APPLY SECTION -->
-    <section id="apply" class="py-24 bg-slate-950 relative overflow-hidden">
+    <section id="apply" class="py-24 border-t border-white/10 relative overflow-hidden bg-brand-surface">
+        
         <!-- Decoration -->
-        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-purple-600 rounded-full blur-3xl opacity-10"></div>
-        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-blue-600 rounded-full blur-3xl opacity-10"></div>
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-pink to-brand-cyan"></div>
+        <div class="absolute top-10 right-10 text-brand-cyan opacity-20"><i class="fas fa-play text-6xl transform rotate-90"></i></div>
+        <div class="absolute bottom-10 left-10 text-brand-pink opacity-20"><i class="fas fa-stop text-6xl"></i></div>
 
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tight">This Is Your Shot. <br><span class="text-white">Take It.</span></h2>
-            <p class="text-xl text-slate-300 mb-12">
+            <h2 class="text-6xl md:text-8xl font-black mb-6 tracking-tight uppercase">Join <span class="gradient-text-cyber">The Mutiny</span></h2>
+            <p class="text-xl text-slate-300 mb-8 font-medium">
                 ALX is training you. Mutiny is giving you the opportunity to prove what you can do.
-                <br>
-                <span class="text-white font-bold bg-red-500/20 px-2 py-1 rounded mt-2 inline-block text-red-400 border border-red-500/30 text-base">Deadline: 01 March 2026 Midnight</span>
             </p>
+            
+            <div class="mb-12">
+                <span class="text-brand-pink font-black border-2 border-brand-pink px-4 py-2 uppercase tracking-widest bg-brand-pink/10 shadow-[0_0_15px_rgba(255,0,127,0.3)] inline-block">
+                    Deadline: 01 March Midnight
+                </span>
+            </div>
 
-            <div class="bg-slate-900 p-8 md:p-12 rounded-3xl border border-slate-800 mb-12 shadow-2xl">
-                <h3 class="text-2xl font-bold mb-8 text-left border-b border-slate-800 pb-4">How To Apply</h3>
-                <div class="grid md:grid-cols-3 gap-8 text-left">
-                    <div class="relative pl-4">
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-transparent rounded-full"></div>
-                        <span class="text-purple-500 font-black text-5xl block mb-2 opacity-20 absolute top-0 right-4">01</span>
-                        <h4 class="font-bold mb-2 text-lg text-white">Fill out the Form</h4>
+            <div class="bg-brand-dark p-8 md:p-12 border border-white/10 mb-12 text-left relative">
+                <!-- Corner Accents -->
+                <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-brand-pink"></div>
+                <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-brand-cyan"></div>
+                <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-brand-cyan"></div>
+                <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-brand-pink"></div>
+
+                <h3 class="text-2xl font-black mb-8 border-b border-white/10 pb-4 uppercase tracking-widest text-white">How To Apply</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="relative">
+                        <span class="text-brand-pink font-black text-5xl block mb-2 opacity-50">01</span>
+                        <h4 class="font-bold mb-2 text-lg text-white uppercase tracking-wide">Fill out the Form</h4>
                         <p class="text-sm text-slate-400 leading-relaxed">Basic info, role choice, and your "Why". Keep it real.</p>
                     </div>
-                    <div class="relative pl-4">
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-pink-500 to-transparent rounded-full"></div>
-                        <span class="text-pink-500 font-black text-5xl block mb-2 opacity-20 absolute top-0 right-4">02</span>
-                        <h4 class="font-bold mb-2 text-lg text-white">Submit Portfolio</h4>
+                    <div class="relative">
+                        <span class="text-brand-cyan font-black text-5xl block mb-2 opacity-50">02</span>
+                        <h4 class="font-bold mb-2 text-lg text-white uppercase tracking-wide">Submit Portfolio</h4>
                         <p class="text-sm text-slate-400 leading-relaxed">3-5 examples of your best work. Links, files, or screenshots.</p>
                     </div>
-                    <div class="relative pl-4">
-                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-transparent rounded-full"></div>
-                        <span class="text-blue-500 font-black text-5xl block mb-2 opacity-20 absolute top-0 right-4">03</span>
-                        <h4 class="font-bold mb-2 text-lg text-white">Tell Us Your Why</h4>
+                    <div class="relative">
+                        <span class="text-white font-black text-5xl block mb-2 opacity-20">03</span>
+                        <h4 class="font-bold mb-2 text-lg text-white uppercase tracking-wide">Tell Us Your Why</h4>
                         <p class="text-sm text-slate-400 leading-relaxed">Which artist excites you most? Why do you want this?</p>
                     </div>
                 </div>
             </div>
 
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxXttpM8Ce4eYrO5ZbQ57M9MwGzt4UzAyjefR52tU251dMBg/viewform?usp=header" target="_blank" class="group inline-flex items-center justify-center bg-white text-slate-900 text-xl font-black px-12 py-6 rounded-full hover:scale-105 transition transform shadow-[0_0_40px_rgba(168,85,247,0.4)] relative overflow-hidden w-full sm:w-auto">
-                <span class="relative z-10 group-hover:text-purple-700 transition">APPLY NOW</span>
-                <i class="fas fa-arrow-right ml-3 relative z-10 group-hover:translate-x-1 transition"></i>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfxXttpM8Ce4eYrO5ZbQ57M9MwGzt4UzAyjefR52tU251dMBg/viewform?usp=header" target="_blank" class="group inline-flex items-center justify-center bg-brand-cyan text-brand-dark text-2xl font-black px-12 py-6 uppercase tracking-widest hover:bg-white transition-colors duration-300 shadow-[0_0_30px_rgba(0,229,255,0.4)] w-full sm:w-auto relative">
+                <span class="relative z-10">APPLY NOW</span>
+                <i class="fas fa-arrow-right ml-4 relative z-10 transform group-hover:translate-x-2 transition-transform duration-300"></i>
             </a>
-            <p class="mt-6 text-slate-500 text-sm">We'll review applications and reach out within 1 week.</p>
+            <p class="mt-6 text-slate-500 text-sm font-bold uppercase tracking-widest">We'll review applications and reach out within 1 week.</p>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-950 py-12 text-center border-t border-slate-900">
-        <div class="flex justify-center space-x-6 mb-8">
-            <a href="https://www.instagram.com/africacreativeagency/" target="_blank" class="text-slate-500 hover:text-white transition"><i class="fab fa-instagram text-2xl"></i></a>
-            <a href="https://www.tiktok.com/@africacreativeagency" target="_blank" class="text-slate-500 hover:text-white transition"><i class="fab fa-tiktok text-2xl"></i></a>
-            <a href="https://x.com/ACA_global" target="_blank" class="text-slate-500 hover:text-white transition"><i class="fab fa-twitter text-2xl"></i></a>
+    <footer class="bg-brand-dark py-12 text-center border-t border-white/10">
+        <div class="flex justify-center space-x-8 mb-8">
+            <a href="https://www.instagram.com/africacreativeagency/" target="_blank" class="text-slate-500 hover:text-brand-pink transition"><i class="fab fa-instagram text-3xl"></i></a>
+            <a href="https://www.tiktok.com/@africacreativeagency" target="_blank" class="text-slate-500 hover:text-brand-cyan transition"><i class="fab fa-tiktok text-3xl"></i></a>
+            <a href="https://x.com/ACA_global" target="_blank" class="text-slate-500 hover:text-brand-pink transition"><i class="fab fa-twitter text-3xl"></i></a>
         </div>
-        <p class="text-slate-600 text-sm">&copy; 2026 Mutiny x ALX Pilot Program. Let's Build.</p>
+        <p class="text-slate-500 mb-2 px-4 uppercase text-xs tracking-widest font-bold">Questions? Contact us on WhatsApp [+27 XX XXX XXXX] or email.</p>
+        <p class="text-slate-600 text-xs uppercase tracking-widest font-bold">&copy; 2026 Mutiny x ALX Pilot Program. Let's Build.</p>
     </footer>
 
     <script>
